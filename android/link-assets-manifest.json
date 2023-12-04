@@ -1,0 +1,37 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Manrope-Bold.ttf",
+      "sha1": "a6b63c832d12337efb3123f47863f54472c81bf5"
+    },
+    {
+      "path": "assets/fonts/Manrope-Light.ttf",
+      "sha1": "67a7446c44660168ed179812753b03390858aa92"
+    },
+    {
+      "path": "assets/fonts/Manrope-Medium.ttf",
+      "sha1": "d62e1b2498f65ea5bc20fc5e365d19239527b419"
+    },
+    {
+      "path": "assets/fonts/Manrope-Regular.ttf",
+      "sha1": "036b14064c7b90b4b200f2730981effea5e58b15"
+    },
+    {
+      "path": "assets/fonts/SofiaSans-Bold.ttf",
+      "sha1": "82106fbff8f655d2d689195f9efdfa1568483687"
+    },
+    {
+      "path": "assets/fonts/SofiaSans-Medium.ttf",
+      "sha1": "c31727c483d3b2118e647fc040d23393ef201975"
+    },
+    {
+      "path": "assets/fonts/SofiaSans-Regular.ttf",
+      "sha1": "5d265bfce42218e81a1b6e453bde36cda522d5ab"
+    },
+    {
+      "path": "assets/fonts/SofiaSans-SemiBold.ttf",
+      "sha1": "daba06637df9c7f254098ee0b6f19923dce1ce1e"
+    }
+  ]
+}
