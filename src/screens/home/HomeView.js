@@ -14,7 +14,7 @@ import R from "@app/res/R";
 import Text from "@app/components/common/Text";
 import { HStack, VStack } from "@gluestack-ui/themed";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecommendProductList } from "@app/store/home/homeSlice";
+import { getPumpList } from "@app/store/home/homeSlice";
 import FastImage from "react-native-fast-image";
 import ProductCard from "@app/components/cards/ProductCard";
 
@@ -33,12 +33,13 @@ const OFFER_LIST = [
   },
 ];
 
-const HomeView = ({ recommendProductList, onProductCardPress, onAddToCartPress }) => {
+const HomeView = ({ pumpList, onPumpCardPress }) => {
   StatusBar.setHidden(true, "none");
+
 
   const scrollX = useRef(new Animated.Value(0)).current;
   const renderProducts = ({ item }) => {
-    return <ProductCard item={item} onProductCardPress={onProductCardPress} onAddToCartPress={onAddToCartPress}/>;
+    return <ProductCard item={item} onPumpCardPress={onPumpCardPress} />;
   };
 
   const renderOfferList = ({ item }) => {
@@ -102,7 +103,7 @@ const HomeView = ({ recommendProductList, onProductCardPress, onAddToCartPress }
             variant="title4"
             font="medium"
           >
-            Hey, Deep
+            Hey, Siya Infotech
           </Text>
           <R.svg.cart />
         </HStack>
@@ -179,38 +180,19 @@ const HomeView = ({ recommendProductList, onProductCardPress, onAddToCartPress }
         backgroundColor={R.color.white}
         paddingHorizontal={R.unit.scale(20)}
       >
-        <Animated.FlatList
-          data={OFFER_LIST}
-          renderItem={renderOfferList}
-          keyExtractor={(item, index) => index.toString()}
-          horizontal={true}
-          pagingEnabled
-          snapToInterval={R.unit.containerWidth}
-          decelerationRate="fast"
-          showsHorizontalScrollIndicator={false}
-          scrollEventThrottle={0}
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-            { useNativeDriver: true }
-          )}
-          style={{
-            width: R.unit.containerWidth,
-            marginTop: R.unit.verticalScale(27),
-          }}
-          contentContainerStyle={{ paddingRight: R.unit.scale(20) }}
-        />
-
         <Text
           numberOfLines={1}
           color={R.color.black}
           variant="h4"
-          font="medium"
+          font="bold"
+          gutterBottom={R.unit.verticalScale(20)}
+          gutterTop={R.unit.verticalScale(20)}
         >
-          Recommended
+          Pump List
         </Text>
 
         <FlatList
-          data={recommendProductList || []}
+          data={pumpList?.Pumps || []}
           renderItem={renderProducts}
           keyExtractor={(item, index) => "key" + index}
           numColumns={2}

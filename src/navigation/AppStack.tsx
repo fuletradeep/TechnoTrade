@@ -2,7 +2,7 @@ import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AppStackC } from "../constants/navigation";
 import BottomTabNavigation from "./BottomTabNavigation";
-import ProductDetailsController from "@app/screens/product_details/ProductDetailsController";
+import PumpDetailsController from "@app/screens/pump_details/PumpDetailsController";
 import CartController from "@app/screens/cart/CartController";
 
 const Stack = createNativeStackNavigator();
@@ -19,10 +19,10 @@ const AppStack = () => {
         })}
       />
       <Stack.Screen
-        name={AppStackC.PRODUCT_DETAILS}
-        component={ProductDetailsController}
+        name={AppStackC.PUMP_DETAILS}
+        component={PumpDetailsController}
         options={() => ({
-          title: AppStackC.PRODUCT_DETAILS,
+          title: AppStackC.PUMP_DETAILS,
           headerShown: false,
         })}
       />

@@ -6,20 +6,15 @@ import Text from "@app/components/common/Text";
 import { HStack, VStack } from "@gluestack-ui/themed";
 import { addToCart } from "@app/store/home/homeSlice";
 
-const ProductCard = ({ item, onProductCardPress, onAddToCartPress }) => {
-  const onPlusIconPress = () => {
-    onAddToCartPress(item);
-  };
+const ProductCard = ({ item, onPumpCardPress }) => {
 
   return (
     <TouchableOpacity
       style={styles.mainTouchable}
-      onPress={() => onProductCardPress(item?.id)}
+      onPress={() => {
+        onPumpCardPress(item)}}
     >
       <VStack>
-        <TouchableOpacity>
-          <R.svg.like />
-        </TouchableOpacity>
         {item?.images ? (
           <FastImage
             source={{
@@ -50,19 +45,28 @@ const ProductCard = ({ item, onProductCardPress, onAddToCartPress }) => {
               variant="title3"
               font="medium"
             >
-              {`$ ${item.price}`}
+              {`Id ${item.Id}`}
             </Text>
             <Text
               numberOfLines={1}
               color={R.color.cardTitle}
               variant="content"
               font="medium"
-              width={item?.isAddedToCart ?  R.unit.scale(90) : R.unit.scale(120)}
+              width={R.unit.scale(90) }
             >
-              {item?.title}
+              { `Port ${item?.Port}`}
             </Text>
           </VStack>
-          <TouchableOpacity
+            <Text
+              numberOfLines={1}
+              color={R.color.cardTitle}
+              variant="content"
+              font="medium"
+              width={ R.unit.scale(90)}
+            >
+              { `Address ${item?.Address}`}
+            </Text>
+          {/* <TouchableOpacity
             onPress={onPlusIconPress}
             style={item?.isAddedToCart ? {
               padding: 5,
@@ -83,7 +87,7 @@ const ProductCard = ({ item, onProductCardPress, onAddToCartPress }) => {
             ) : (
               <R.svg.add />
             )}
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </HStack>
       </VStack>
     </TouchableOpacity>
@@ -95,7 +99,7 @@ export default ProductCard;
 const styles = StyleSheet.create({
   mainTouchable: {
     padding: R.unit.scale(13),
-    backgroundColor: R.color.black + 30,
+    backgroundColor: R.color.gray3Light+60,
     flex: 1 / 2.05,
     borderRadius: R.unit.scale(12),
     marginBottom: R.unit.verticalScale(22),

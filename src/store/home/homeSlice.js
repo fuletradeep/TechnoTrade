@@ -3,15 +3,56 @@ import apiClient, { axiosMD } from "@app/package/axios/axios";
 import apiUrls from "@app/constants/apiUrls";
 import axios from "axios";
 
-export const getRecommendProductList = createAsyncThunk(
-  "home/getRecommendProductList",
-  
-);
+export const getPumpList = createAsyncThunk("home/getPumpList", async (id) => {
+  let data = JSON.stringify({
+    Protocol: "jsonPTS",
+    Packets: [
+      {
+        Id: 1,
+        Type: "GetPumpsConfiguration",
+      },
+    ],
+  });
+  try {
+    const response = await axios.post(
+      "https://192.168.1.9:443/jsonPTS/",
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic RGVlcDpkZWVw",
+        },
+      }
+    );
+    return { isError: 0, response: response.data };
+  } catch (error) {
+    if (error.response) {
+      console.error("Response error:", error.response.data);
+      console.error("Status code:", error.response.status);
+      return {
+        isError: 1,
+        message: "Please try again" + `\n${error.response.data}`,
+      };
+    } else if (error.request) {
+      console.error("No response received. Is the server down?", error.request);
+      return {
+        isError: 1,
+        message: "Please try again" + `\n${error.request}`,
+      };
+    } else {
+      console.error("Request error:", error.message);
+      return {
+        isError: 1,
+        message: "Please try again" + `\n${error.message}`,
+      };
+    }
+  }
+});
 
 const initialState = {
   isLoadingRequest: false,
   requestLoader: "",
-  recommendProductList: undefined,
+  pumpList: [],
   status: "idle",
   error: undefined,
   paginate: {
@@ -21,7 +62,6 @@ const initialState = {
   total: 0,
   isListEnd: false,
   searchText: null,
-  cartItem: [],
 };
 
 const homeSlice = createSlice({
@@ -34,14 +74,14 @@ const homeSlice = createSlice({
     reset(state) {
       state.isLoadingRequest = false;
       state.requestLoader = "";
-      state.recommendProductList = undefined;
+      state.pumpList = undefined;
       state.status = "idle";
       state.error = undefined;
     },
     resetHomeList(state) {
       state.isLoadingRequest = false;
       state.requestLoader = "";
-      state.recommendProductList = undefined;
+      state.pumpList = undefined;
       state.status = "idle";
       state.error = undefined;
       state.paginate.page = 0;
@@ -55,75 +95,41 @@ const homeSlice = createSlice({
     setSearchText(state, action) {
       state.searchText = action.payload;
     },
-    addToCart(state, action) {
-      console.log("ACCCCCCC===", action.payload);
-      const isAlreadySelected = state.cartItem.some(
-        (selectedItem) => selectedItem.id === action.payload.id
-      );
-
-      // If not selected, add it to the array and update isAddedToCart to true
-      if (!isAlreadySelected) {
-        const updatedItem = { ...action.payload, isAddedToCart: true };
-        state.cartItem = [...state.cartItem, updatedItem];
-        console.log('CART____',state.cartItem)
-      }
-
-      const updatedData = state.recommendProductList.map((dataItem) =>
-        dataItem.id === action.payload.id
-          ? { ...dataItem, isAddedToCart: true }
-          : dataItem
-      );
-      console.log("ooooooo8888888", updatedData);
-      state.recommendProductList = updatedData;
-    },
     default: initialState,
   },
   extraReducers: (builder) => {
-    builder.addCase(getRecommendProductList.pending, (state) => {
+    builder.addCase(getPumpList.pending, (state) => {
       state.status = "loading";
       state.isLoadingRequest = true;
-      state.requestLoader = "getRecommendProductList";
+      state.requestLoader = "getPumpList";
       state.error = undefined;
     });
-    builder.addCase(getRecommendProductList.fulfilled, (state, action) => {
-      // console.log("=====>>>", action.payload);
+    builder.addCase(getPumpList.fulfilled, (state, action) => {
       if (action.payload.isError === 0) {
         state.status = "succeeded";
         state.isLoadingRequest = false;
-        state.requestLoader = "getRecommendProductList";
+        state.requestLoader = "getPumpList";
         state.error = undefined;
         state.total = action.payload.response.total;
-        if (
-          action.payload.response.products == null ||
-          action.payload.response.products?.length == 0
-        ) {
-          state.isListEnd = true;
-        } else {
-          // const recommendProductList = state.recommendProductList || [];
-          // state.recommendProductList = [
-          //   ...recommendProductList,
-          //   ...action.payload.response.products,
-          // ];
-          state.recommendProductList = action.payload.response.products.map(
-            (product) => ({ ...product, isAddedToCart: false })
-          );
-          state.isListEnd = false;
-        }
+        state.pumpList = action.payload.response.Packets[0]?.Data;
+        state.isListEnd = false;
       } else {
         state.status = "failed";
         state.isLoadingRequest = false;
-        state.requestLoader = "getRecommendProductList";
+        state.requestLoader = "getPumpList";
         state.error = action.payload?.message;
         state.isListEnd = false;
+        state.pumpList = [];
       }
     });
-    builder.addCase(getRecommendProductList.rejected, (state, action) => {
+    builder.addCase(getPumpList.rejected, (state, action) => {
       state.status = "failed";
       state.isLoadingRequest = false;
-      state.requestLoader = "getRecommendProductList";
+      state.requestLoader = "getPumpList";
       const { error } = action;
       state.error = error;
       state.isListEnd = false;
+      state.pumpList = [];
     });
   },
 });
@@ -137,7 +143,6 @@ export const {
   resetHomeUserItemList,
   setPagination,
   setSearchText,
-  addToCart,
 } = homeSlice.actions;
 
 export default homeSlice.reducer;

@@ -1,7 +1,7 @@
-const RECOMMENDED_LIST = () => `/jsonPTS/`;
+const PUMP_LIST = () => `GetBatteryVoltage`;
 const PRODUCT_DETAILS = (id) => `/products/${id}`;
 
 export default {
-    RECOMMENDED_LIST,
+    PUMP_LIST,
     PRODUCT_DETAILS,
 }

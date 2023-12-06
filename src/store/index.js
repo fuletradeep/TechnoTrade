@@ -5,12 +5,12 @@ import thunk from 'redux-thunk';
 // import homeReducer from './home/HomeSlice'
 import homeReducer from './home/homeSlice'
 import { axiosInterceptor } from '@app/package/axios';
-import ProductDetailsSlice from './product_details/ProductDetailsSlice';
 import CartSlice from './cart/CartSlice'
+import PumpDetailsSlice from './pump_details/PumpDetailsSlice';
 
 const rootReducer = combineReducers({
   home:homeReducer,
-  product:ProductDetailsSlice,
+  pump:PumpDetailsSlice,
   cart:CartSlice
 });
 

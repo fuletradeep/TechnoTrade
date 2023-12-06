@@ -19,6 +19,6 @@ export const AppStackC = {
   APP_STACK_SCREEN: 'AppStackScreen',
   HOME_SCREEN: 'HomeScreen',
   BOTTOM_TAB_SCREEN:'BottomTabScreen',
-  PRODUCT_DETAILS:'ProductDetails',
+  PUMP_DETAILS:'PumpDetails',
   CART:'Cart'
 };

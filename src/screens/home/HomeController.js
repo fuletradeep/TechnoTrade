@@ -8,14 +8,13 @@ import { useHomeModel } from "./HomeModel";
 import axios from "axios";
 
 const HomeController = (props) => {
-  const { recommendProductList, onProductCardPress,onAddToCartPress } = useHomeModel();
+  const { pumpList, onPumpCardPress } = useHomeModel();
 
   return (
     <HomeView
       {...props}
-      recommendProductList={recommendProductList}
-      onProductCardPress={onProductCardPress}
-      onAddToCartPress={onAddToCartPress}
+      pumpList={pumpList}
+      onPumpCardPress={onPumpCardPress}
     />
   );
 };
