@@ -5,15 +5,15 @@ import { useProductDetailsModel } from "./PumpDetailsModel";
 import { useHomeModel } from "../home/HomeModel";
 
 const PumpDetailsController = (props) => {
-  const { pumpDetails,nozelDetails, onHeaderBackPress } =
+  const { pumpDetails,nozelDetails, onHeaderBackPress,onForceStopPress } =
     useProductDetailsModel(props.route.params.id);
 
-    console.log('controller',nozelDetails)
   return (
     <ProductDetailsView
       pumpDetails={pumpDetails}
       onHeaderBackPress={onHeaderBackPress}
       nozelDetails={nozelDetails}
+      onForceStopPress={onForceStopPress}
     />
   );
 };

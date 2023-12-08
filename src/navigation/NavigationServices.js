@@ -12,7 +12,6 @@ export function navigate(name, params) {
 }
 
 export function stackFirst(routeName, params) {
-    // console.log(navigationRef.current);
     if (isReadyRef.current && navigationRef.current) {
         if (navigationRef.current?.canGoBack()){
             navigationRef.current?.setParams(params);

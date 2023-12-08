@@ -7,10 +7,12 @@ import homeReducer from './home/homeSlice'
 import { axiosInterceptor } from '@app/package/axios';
 import CartSlice from './cart/CartSlice'
 import PumpDetailsSlice from './pump_details/PumpDetailsSlice';
+import FuelDispensingSlice from './fuel_dispensing/FuelDispensingSlice';
 
 const rootReducer = combineReducers({
   home:homeReducer,
   pump:PumpDetailsSlice,
+  fuel:FuelDispensingSlice,
   cart:CartSlice
 });
 

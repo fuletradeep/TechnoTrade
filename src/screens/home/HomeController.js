@@ -8,13 +8,14 @@ import { useHomeModel } from "./HomeModel";
 import axios from "axios";
 
 const HomeController = (props) => {
-  const { pumpList, onPumpCardPress } = useHomeModel();
+  const { pumpList, onPumpCardPress,isLoadingRequest } = useHomeModel();
 
   return (
     <HomeView
       {...props}
       pumpList={pumpList}
       onPumpCardPress={onPumpCardPress}
+      isLoadingRequest={isLoadingRequest}
     />
   );
 };

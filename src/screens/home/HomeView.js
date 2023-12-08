@@ -12,7 +12,7 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import R from "@app/res/R";
 import Text from "@app/components/common/Text";
-import { HStack, VStack } from "@gluestack-ui/themed";
+import { HStack, Spinner, VStack } from "@gluestack-ui/themed";
 import { useDispatch, useSelector } from "react-redux";
 import { getPumpList } from "@app/store/home/homeSlice";
 import FastImage from "react-native-fast-image";
@@ -33,9 +33,8 @@ const OFFER_LIST = [
   },
 ];
 
-const HomeView = ({ pumpList, onPumpCardPress }) => {
+const HomeView = ({ pumpList, onPumpCardPress, isLoadingRequest }) => {
   StatusBar.setHidden(true, "none");
-
 
   const scrollX = useRef(new Animated.Value(0)).current;
   const renderProducts = ({ item }) => {
@@ -174,32 +173,40 @@ const HomeView = ({ pumpList, onPumpCardPress }) => {
           </VStack>
         </HStack>
       </VStack>
-
-      <VStack
-        // flex={1}
-        backgroundColor={R.color.white}
-        paddingHorizontal={R.unit.scale(20)}
-      >
-        <Text
-          numberOfLines={1}
-          color={R.color.black}
-          variant="h4"
-          font="bold"
-          gutterBottom={R.unit.verticalScale(20)}
-          gutterTop={R.unit.verticalScale(20)}
+      {isLoadingRequest ? (
+        <VStack flex={1} justifyContent="center" alignItems="center">
+          <Spinner size={R.unit.scale(35)} color={R.color.primaryLight}/>
+        </VStack>
+      ) : (
+        <VStack
+          // flex={1}
+          backgroundColor={R.color.white}
+          paddingHorizontal={R.unit.scale(20)}
         >
-          Pump List
-        </Text>
+          <Text
+            numberOfLines={1}
+            color={R.color.black}
+            variant="h4"
+            font="bold"
+            gutterBottom={R.unit.verticalScale(20)}
+            gutterTop={R.unit.verticalScale(20)}
+          >
+            Pump List
+          </Text>
 
-        <FlatList
-          data={pumpList?.Pumps || []}
-          renderItem={renderProducts}
-          keyExtractor={(item, index) => "key" + index}
-          numColumns={2}
-          columnWrapperStyle={{ flex: 1 / 2, justifyContent: "space-between" }}
-          showsVerticalScrollIndicator={false}
-        />
-      </VStack>
+          <FlatList
+            data={pumpList?.Pumps || []}
+            renderItem={renderProducts}
+            keyExtractor={(item, index) => "key" + index}
+            numColumns={2}
+            columnWrapperStyle={{
+              flex: 1 / 2,
+              justifyContent: "space-between",
+            }}
+            showsVerticalScrollIndicator={false}
+          />
+        </VStack>
+      )}
     </View>
   );
 };

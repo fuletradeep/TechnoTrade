@@ -15,7 +15,6 @@ const axiosInterceptor = (dispatch) => {
       // const authToken = store.getState().auth.authToken?.token;
       // const authToken = store.getState().auth.authToken;
       const authToken = store.getState().auth?.authToken;
-      // console.log("request",request);
       if (!authToken) {
         return request;
       }
@@ -30,7 +29,6 @@ const axiosInterceptor = (dispatch) => {
       return;
     }
 
-    // console.log("response=>", response);
 
     // set message to toast service
     if (response.data && response.data.code == -1) {
@@ -44,7 +42,6 @@ const axiosInterceptor = (dispatch) => {
 
     // logout functionality on invalid function
     if (response.status == 200 && response?.data?.responseCode == 103) {
-      console.log("loging out...");
       // dispatch(logout())
       // navigate(AppStackC.HOME_SCREEN, { isLogOut: true })
       // stackFirst(AppStackC.HOME_SCREEN, { isLogOut: true })

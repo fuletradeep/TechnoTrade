@@ -84,7 +84,7 @@ export const getEncodedParamString = (obj) => {
   return str
 }
 
-export const isEmpty = (data) => {
+export const checkNull = (data) => {
   if (
     data !== null &&
     data !== '' &&

@@ -41,4 +41,19 @@ export const TAB_BAR = [
   },
 ];
 
+export const FUEL_DESPENSING_TYPE = [
+  {
+    type:'Amount',
+    value:'Amount'
+  },
+  {
+    type:'Volume',
+    value:'Volume'
+  },
+  {
+    type:'Full Tank',
+    value:'FullTank'
+  }
+]
+
 

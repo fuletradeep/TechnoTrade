@@ -51,7 +51,6 @@ const BaseHeader = (props) => {
     Alert.alert("Logout", "Are you sure want to logout?", [
       {
         text: "No",
-        onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
       {

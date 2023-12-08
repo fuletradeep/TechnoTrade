@@ -3,7 +3,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AppStackC } from "../constants/navigation";
 import BottomTabNavigation from "./BottomTabNavigation";
 import PumpDetailsController from "@app/screens/pump_details/PumpDetailsController";
-import CartController from "@app/screens/cart/CartController";
+import FuelDispensingController from "@app/screens/pump_despensir/FuelDispensingController";
+import InvoiceScreen from "@app/screens/pump_details/InvoiceScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,11 +27,11 @@ const AppStack = () => {
           headerShown: false,
         })}
       />
-       <Stack.Screen
-        name={AppStackC.CART}
-        component={CartController}
+      <Stack.Screen
+        name={AppStackC.FUEL_DISPENSING}
+        component={FuelDispensingController}
         options={() => ({
-          title: AppStackC.CART,
+          title: AppStackC.FUEL_DISPENSING,
           headerShown: false,
         })}
       />

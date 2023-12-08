@@ -205,7 +205,6 @@ const cartProduct = [
 
 const CartView = () => {
   const renderCartItem = ({ item }) => {
-    console.log(item);
     return (
       <VStack>
         <HStack alignItems="center" mt={R.unit.verticalScale(12)}>

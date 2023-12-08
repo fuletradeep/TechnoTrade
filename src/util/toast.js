@@ -12,7 +12,7 @@ const show = (
     description: message,
     type: type,
     hideStatusBar: true,
-    duration: 2000,
+    duration: 5000,
     autoHide: true,
   });
 };

@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { addToCart, getPumpList } from "@app/store/home/homeSlice";
 import axios from "axios";
 import { NativeModules } from "react-native";
-import RNFetchBlob from "react-native-fetch-blob";
 import toast from "@app/util/toast";
 
 export function useHomeModel() {
@@ -14,7 +13,7 @@ export function useHomeModel() {
 
   const dispatch = useDispatch();
 
-  const { pumpList } = useSelector((state) => state.home);
+  const { pumpList,isLoadingRequest } = useSelector((state) => state.home);
 
 
   useEffect(() => {
@@ -22,12 +21,12 @@ export function useHomeModel() {
   }, []);
 
   const onPumpCardPress = (id) => {
-    console.log('iiid',id)
     navigation.navigate(AppStackC.PUMP_DETAILS, { id: id });
   };
 
   return {
     onPumpCardPress,
     pumpList,
+    isLoadingRequest
   };
 }

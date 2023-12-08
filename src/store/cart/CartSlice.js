@@ -9,7 +9,6 @@ export const addCartItems = createAsyncThunk(
     try {
       return { isError: 0, response: product };
     } catch (err) {
-      console.log(" cart/addCartItems error ", err);
       return {
         isError: 1,
         message: "Please try again" + `\n${err.toString()}`,
@@ -24,7 +23,6 @@ export const removeCartItems = createAsyncThunk(
       try {
         return { isError: 0, response: product };
       } catch (err) {
-        console.log(" cart/removeCartItems error ", err);
         return {
           isError: 1,
           message: "Please try again" + `\n${err.toString()}`,
@@ -80,7 +78,6 @@ const cartItemsSlice = createSlice({
       state.searchText = action.payload;
     },
     addToCart(state, action) {
-      console.log("ACCCCCCC===", action.payload);
       const isAlreadySelected = state.cartItem.some(
         (selectedItem) => selectedItem.id === action.payload.id
       );
@@ -89,7 +86,6 @@ const cartItemsSlice = createSlice({
       if (!isAlreadySelected) {
         const updatedItem = { ...action.payload, isAddedToCart: true };
         state.cartItem = [...state.cartItem, updatedItem];
-        console.log('CART____',state.cartItem)
       }
       updateCart(action.payload)
     },

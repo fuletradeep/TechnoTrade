@@ -17,13 +17,10 @@ const RootApp = () => {
   useEffect(() => {
     // Subscribe
     const unsubscribe = NetInfo.addEventListener((state) => {
-      console.log("Is connected?", state.isConnected);
       if (state.isConnected == true) {
         setModalVisible(false);
-        console.log("connection-Online");
       } else {
         setModalVisible(true);
-        console.log("connection-OFFline");
       }
     });
 
